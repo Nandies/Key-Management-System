@@ -1,10 +1,11 @@
-cat > .gitignore << 'EOL'
+# Key Management System - .gitignore file
+
 # Visual Studio files
 .vs/
 *.suo
 *.user
 *.userosscache
-#*.sln.docstates
+*.sln.docstates
 *.vcxproj.filters
 ipch/
 *.aps
@@ -27,6 +28,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Visual Studio 2015/2017/2019 cache/options directory
+.vs/
 
 # Visual C++ cache files
 ipch/
@@ -51,4 +55,65 @@ ipch/
 *.ilk
 *.iobj
 *.ipdb
-EOL
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Database files - DO NOT IGNORE assets/ directory needed for README
+# But ignore actual key database and backup files
+keys.csv
+*_auto_backup_*.csv
+*_before_repair_*.csv
+*.backup.csv
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Windows specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# User-specific files
+*.rsuser
+
+# NuGet packages
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Create an empty assets directory with a placeholder for screenshot
+# !assets/
+# !assets/placeholder.txt
+
+# Future expansion - API/Discord Bot specific ignores
+config.json
+auth.json
+.env
+node_modules/
