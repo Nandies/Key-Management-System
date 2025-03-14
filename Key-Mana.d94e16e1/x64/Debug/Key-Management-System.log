@@ -1,0 +1,15 @@
+﻿  Application.cpp
+  BackupRestoreUtil.cpp
+  FileManager.cpp
+  FileSystemStorage.cpp
+  Key.cpp
+  KeyCollection.cpp
+  KeyImporter.cpp
+  KeyManager.cpp
+C:\Dev\cpp\Key-Management-System\KeyManager.cpp(300,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  UserInterface.cpp
+  Generating Code...
+  Key-Management-System.vcxproj -> C:\Dev\cpp\Key-Management-System\x64\Debug\Key-Management-System.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
