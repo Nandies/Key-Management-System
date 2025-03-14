@@ -4,7 +4,7 @@ cat > .gitignore << 'EOL'
 *.suo
 *.user
 *.userosscache
-*.sln.docstates
+#*.sln.docstates
 *.vcxproj.filters
 ipch/
 *.aps
