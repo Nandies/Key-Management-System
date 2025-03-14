@@ -6,8 +6,6 @@
 
 A modern, lightweight C++ application for managing software license keys with support for different subscription types.
 
-![Key Management System Screenshot](assets/screenshot.png)
-
 ## ✨ Features
 
 - **Multiple Key Types**: Support for Daily, Weekly, Monthly, and Lifetime keys
