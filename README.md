@@ -157,13 +157,48 @@ Contributions are welcome! Please feel free to submit pull requests.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🗺️ Roadmap
+
+Our vision for the future development of the Key Management System focuses on two key areas:
+
+### Discord Bot Integration
+
+- **REST API Development**: Create a secure API layer to allow Discord bot integration
+- **Bot Command Structure**: Design intuitive Discord commands for key management operations
+- **Webhook Support**: Implement webhooks for real-time notifications (key usage, low inventory, etc.)
+- **Multi-Server Support**: Allow the bot to manage keys across multiple Discord servers
+- **Discord Role Integration**: Tie key types to specific Discord roles
+- **Automated Distribution**: Set up automatic key distribution based on user actions or time triggers
+
+### Enhanced Security
+
+- **Key Encryption**: Implement AES-256 encryption for keys stored in the database
+- **Secure Authentication**: Add robust authentication for API access
+- **Request Validation**: Add signature verification for all bot commands
+- **Audit Logging**: Comprehensive logging system for all key operations
+- **Intrusion Detection**: Monitor and alert on suspicious access patterns
+- **Rate Limiting**: Prevent abuse through intelligent rate limiting
+- **Data Sanitization**: Improve input validation and sanitization
+
+### Additional Improvements
+
+- **Web Dashboard**: Create a web-based admin interface
+- **Database Migration**: Support for SQL databases (MySQL, PostgreSQL)
+- **Analytics**: Generate insights about key usage patterns
+- **Bulk Operations**: Support for bulk key management operations
+- **Localization**: Support for multiple languages
+- **Cloud Backup**: Automatic cloud backups of key database
+
+---
+
 ## 🙏 Acknowledgements
 
 - [Visual Studio](https://visualstudio.microsoft.com/) - Development environment
 - [Windows API](https://docs.microsoft.com/en-us/windows/win32/api/) - File system operations
+- [Discord API](https://discord.com/developers/docs/intro) - For future bot integration
 
 ---
 
 <p align="center">
-  Made with ❤️ by Your Name
+  Made with ❤️ by Nandies
 </p>
