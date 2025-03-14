@@ -41,7 +41,7 @@ KeyType promptForKeyType() {
 
 void UserInterface::run() {
     std::cout << "========================================" << std::endl;
-    std::cout << "         PEEPO KEY MANAGER          " << std::endl;
+    std::cout << "         NANDIES KEY MANAGER          " << std::endl;
     std::cout << "========================================" << std::endl;
 
     int choice;
