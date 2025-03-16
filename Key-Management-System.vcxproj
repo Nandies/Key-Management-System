@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ApiServer.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BackupRestoreUtil.cpp" />
     <ClCompile Include="FileManager.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApiServer.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackupRestoreUtil.h" />
     <ClInclude Include="FileManager.h" />
@@ -96,7 +98,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Dev\cpp\Key-Management-System\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\vcpkg\installed\x64-windows\include;C:\cpp-httplib;C:\asio\asio\include;C:\Crow\include;C:\Dev\cpp\Key-Management-System\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\vcpkg\installed\x64-windows\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\vcpkg\installed\x64-windows\include;C:\cpp-httplib;C:\asio\asio\include;C:\Crow\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\vcpkg\installed\x64-windows\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,13 +137,29 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlib.lib;boost_system-vc143-mt-x64-1_87.lib;libssl.lib
+;libcrypto.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "C:\vcpkg\installed\x64-windows\bin\libssl-3.dll" (
+    copy /Y "C:\vcpkg\installed\x64-windows\bin\libssl-3.dll" "$(OutDir)"
+) else (
+    echo libssl-3.dll not found, SSL may not work
+)
+
+if exist "C:\vcpkg\installed\x64-windows\bin\libcrypto-3.dll" (
+    copy /Y "C:\vcpkg\installed\x64-windows\bin\libcrypto-3.dll" "$(OutDir)"
+) else (
+    echo libcrypto-3.dll not found, SSL may not work
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,7 +167,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -153,7 +176,22 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlib.lib;boost_system-vc143-mt-x64-1_87.lib;libssl.lib
+;libcrypto.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "C:\vcpkg\installed\x64-windows\bin\libssl-3.dll" (
+    copy /Y "C:\vcpkg\installed\x64-windows\bin\libssl-3.dll" "$(OutDir)"
+) else (
+    echo libssl-3.dll not found, SSL may not work
+)
+
+if exist "C:\vcpkg\installed\x64-windows\bin\libcrypto-3.dll" (
+    copy /Y "C:\vcpkg\installed\x64-windows\bin\libcrypto-3.dll" "$(OutDir)"
+) else (
+    echo libcrypto-3.dll not found, SSL may not work
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
