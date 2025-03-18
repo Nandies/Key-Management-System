@@ -1,0 +1,259 @@
+# 🤖 Key Management System - Discord Bot
+
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
+[![discord.py](https://img.shields.io/badge/discord.py-2.3%2B-blue)](https://discordpy.readthedocs.io/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+A Discord bot for the Key Management System that allows users to request and manage license keys directly from Discord. This bot interfaces with the C++ Key Management System API to provide a seamless user experience.
+
+![Discord Bot Screenshot](assets/discord-bot-screenshot.png)
+
+## ✨ Features
+
+- **User Commands**: Allow users to request and check license keys
+- **Admin Commands**: Manage keys, view statistics, and monitor usage
+- **Role-Based Access**: Secure commands with Discord role permissions
+- **Webhook Notifications**: Send real-time alerts for key events
+- **Caching System**: Performance optimization for frequently accessed data
+- **Security Measures**: Rate limiting, cooldowns, and intrusion detection
+- **Ephemeral Responses**: Private responses for sensitive key information
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.9 or higher
+- [Key Management System](https://github.com/Nandies/Key-Management-System) with API running
+- Discord Bot Token (from Discord Developer Portal)
+- Administrator access to a Discord server
+
+### Installation
+
+1. **Clone the repository**:
+```bash
+git clone https://github.com/Nandies/Key-Management-System.git
+cd Key-Management-System/DiscordBot
+```
+
+2. **Set up a virtual environment** (recommended):
+```bash
+python -m venv venv
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
+
+3. **Install dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+4. **Create configuration file**:
+```bash
+# Copy the example environment file
+cp .env.example .env
+# Edit the .env file with your configuration
+```
+
+5. **Configure the .env file**:
+```env
+# Discord Bot Credentials
+DISCORD_TOKEN=your_discord_bot_token
+BOT_PREFIX=!
+
+# Key Management System API
+API_BASE_URL=http://localhost:8080/api
+API_KEY=your_api_key
+
+# Logging
+LOG_LEVEL=INFO
+
+# Discord Webhooks (optional)
+ADMIN_WEBHOOK_URL=https://discord.com/api/webhooks/your_webhook_url
+NOTIFICATION_WEBHOOK_URL=https://discord.com/api/webhooks/your_webhook_url
+```
+
+6. **Run the bot**:
+```bash
+python main.py
+```
+
+## 📖 Usage
+
+### User Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/getkey` | Request a license key with specified type | `/getkey key_type:Monthly` |
+| `/checkkey` | Check the status of a license key | `/checkkey key:ABC-123-DEF` |
+| `/keyavailability` | Check the availability of all key types | `/keyavailability` |
+
+### Admin Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/admin stats` | Get detailed key statistics | `/admin stats` |
+| `/admin listkeys` | List keys of a specific type | `/admin listkeys key_type:Monthly show_used:true limit:10` |
+| `/admin addkey` | Add a new license key | `/admin addkey key_value:ABC-123-DEF key_type:Monthly` |
+| `/admin unassignkey` | Unassign a key from a user | `/admin unassignkey key_value:ABC-123-DEF` |
+
+### Setting Up Admin Permissions
+
+1. Create a "Key Admin" role in your Discord server
+2. Assign this role to users who should have admin access
+3. Ensure the bot has the necessary permissions:
+   - Send Messages
+   - Embed Links
+   - Use Application Commands
+
+## ⚙️ Configuration Options
+
+### Discord Bot Settings
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `DISCORD_TOKEN` | Your Discord bot token | (Required) |
+| `BOT_PREFIX` | Command prefix for text commands | `!` |
+
+### API Settings
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `API_BASE_URL` | URL of the Key Management System API | (Required) |
+| `API_KEY` | API key for authentication | (Required) |
+
+### Webhook Settings
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `ADMIN_WEBHOOK_URL` | Discord webhook URL for admin notifications | (Optional) |
+| `NOTIFICATION_WEBHOOK_URL` | Discord webhook URL for general notifications | (Optional) |
+
+### Cache Settings
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `CACHE_ENABLED` | Enable/disable caching | `true` |
+| `CACHE_EXPIRY_MINUTES` | Cache expiry time in minutes | `5` |
+
+### Security Settings
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `MAX_FAILED_ATTEMPTS` | Max number of failed attempts before cooldown | `5` |
+| `COOLDOWN_PERIOD` | Cooldown period in seconds | `300` |
+
+## 🔒 Security Considerations
+
+- The bot uses ephemeral responses for sensitive commands to keep key information private
+- Rate limiting prevents abuse of key requests
+- Admin-only commands are restricted by Discord role
+- API communication is secured with an API key
+- Failed attempt tracking prevents brute force attacks
+
+## 🔄 Integration with Key Management System
+
+This Discord bot requires the [Key Management System](https://github.com/Nandies/Key-Management-System) to be running with the API server enabled:
+
+1. **Start the Key Management System API server**:
+```bash
+KeyManagementSystem.exe start_api 8080
+```
+
+2. **Configure the Discord bot** to use the correct API URL:
+```env
+API_BASE_URL=http://localhost:8080/api
+API_KEY=your_api_key
+```
+
+3. The API key configured in the bot must match the one set in the API server.
+
+## 📊 Webhook Notifications
+
+The bot can send notifications to Discord webhooks for various events:
+
+### Admin Notifications
+- Bot startup/shutdown
+- Key additions and removals
+- Error alerts
+- Security events
+
+### General Notifications
+- Key assignments
+
+## 🧩 Project Structure
+
+```
+DiscordBot/
+├── api/                # API client for Key Management System
+│   ├── client.py       # API request handling
+│   └── models.py       # Data models for API responses
+├── bot/                # Discord bot core
+│   ├── client.py       # Bot initialization
+│   ├── commands/       # Bot commands
+│   │   ├── admin_commands.py    # Administrator commands
+│   │   └── user_commands.py     # User-facing commands
+│   └── events.py       # Event handlers
+├── utils/              # Utility functions
+│   ├── cache.py        # Caching system
+│   ├── logger.py       # Logging configuration
+│   └── webhook.py      # Discord webhook handling
+├── .env.example        # Example environment configuration
+├── config.py           # Configuration management
+├── main.py             # Entry point
+└── requirements.txt    # Python dependencies
+```
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+**Bot doesn't respond to commands:**
+- Ensure the bot has the correct permissions in your Discord server
+- Check that you've invited the bot with application commands permissions
+- Verify the bot is running and connected to Discord
+
+**Cannot access API:**
+- Make sure the Key Management System API is running
+- Check the API URL and key in your .env file
+- Verify network connectivity between the bot and API
+
+**Admin commands not working:**
+- Ensure you have the "Key Admin" role in your Discord server
+- Check that the bot has permission to manage roles
+
+**Webhook errors:**
+- Verify your webhook URLs are correct
+- Ensure the webhooks haven't been deleted from Discord
+
+### Logs
+
+The bot creates log files in the `logs/` directory. Check these logs for detailed error information when troubleshooting.
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
+- [discord.py](https://github.com/Rapptz/discord.py) - Discord API wrapper for Python
+- [Python-dotenv](https://github.com/theskumar/python-dotenv) - Environment variable management
+- [aiohttp](https://github.com/aio-libs/aiohttp) - Async HTTP client/server
+- [pydantic](https://github.com/pydantic/pydantic) - Data validation using Python type annotations
+
+---
+
+<p align="center">
+  Made with ❤️ by Nandies
+</p>
