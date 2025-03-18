@@ -56,7 +56,7 @@ This will present you with the main menu:
 
 ```
 ========================================
-         PEEPO KEY MANAGER          
+         NANDIES KEY MANAGER          
 ========================================
 
 MAIN MENU:
